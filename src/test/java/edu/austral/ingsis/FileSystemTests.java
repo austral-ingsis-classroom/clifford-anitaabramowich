@@ -1,15 +1,16 @@
 package edu.austral.ingsis;
 
-import static java.util.Map.entry;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.Test;
+
+import static java.util.Map.entry;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FileSystemTests {
 
-  private final FileSystemRunner runner = commands -> List.of();
+  private final FileSystemRunner runner = new FileSystemRunnerImpl();
 
   private void executeTest(List<Map.Entry<String, String>> commandsAndResults) {
     final List<String> commands = commandsAndResults.stream().map(Map.Entry::getKey).toList();
