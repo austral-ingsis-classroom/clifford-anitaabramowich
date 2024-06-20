@@ -5,32 +5,43 @@ import java.util.List;
 import java.util.Optional;
 
 public class Directory implements Node {
-    private List<Node> children;
-    private String name;
-    private Optional<Directory> parent;
+  private List<Node> children;
+  private String name;
+  private Optional<Directory> parent;
 
-    public Directory(String name, Optional<Directory> parent) {
-        this.name = name;
-        this.parent = parent;
-        this.children = new ArrayList<>();
+  public Directory(String name, Optional<Directory> parent) {
+    this.name = name;
+    this.parent = parent;
+    this.children = new ArrayList<>();
+  }
+
+  @Override
+  public String getName() {
+    return this.name;
+  }
+
+  @Override
+  public Optional<Directory> getParent() {
+    return this.parent;
+  }
+
+  public List<Node> getChildren() {
+    return children;
+  }
+
+  public void addChild(Node child) {
+    children.add(child);
+  }
+
+  public void removeChild(Node child) {
+    children.remove(child);
+  }
+
+  public Directory getRoot() {
+    Directory current = this;
+    while (current.getParent().isPresent()) {
+      current = current.getParent().get();
     }
-
-    @Override
-    public String getName() {
-        return this.name;
-    }
-
-    @Override
-    public Optional<Directory> getParent() {
-        return this.parent;
-    }
-
-    public List<Node> getChildren() {
-        return children;
-    }
-
-    public void addChild(Node child) {
-        children.add(child);
-    }
-
+    return current;
+  }
 }
